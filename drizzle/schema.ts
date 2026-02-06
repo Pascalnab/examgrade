@@ -1,5 +1,4 @@
 import { int, json, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
-
 /**
  * Core user table backing auth flow.
  */
@@ -7,17 +6,16 @@ export const users = mysqlTable("users", {
   id: int("id").autoincrement().primaryKey(),
   openId: varchar("openId", { length: 64 }).notNull().unique(),
   name: text("name"),
-  email: varchar("email", { length: 320 }),
+  email: varchar("email", { length: 320 }).unique(),
+  passwordHash: varchar("passwordHash", { length: 255 }),
   loginMethod: varchar("loginMethod", { length: 64 }),
   role: mysqlEnum("role", ["user", "admin"]).default("user").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
   lastSignedIn: timestamp("lastSignedIn").defaultNow().notNull(),
 });
-
 export type User = typeof users.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
-
 /**
  * Exams table — stores each uploaded exam submission
  */
@@ -43,10 +41,8 @@ export const exams = mysqlTable("exams", {
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });
-
 export type Exam = typeof exams.$inferSelect;
 export type InsertExam = typeof exams.$inferInsert;
-
 /**
  * Exam results — overall grading result for an exam
  */
@@ -76,10 +72,8 @@ export const examResults = mysqlTable("exam_results", {
   analysisData: json("analysisData").$type<Record<string, unknown>>(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
-
 export type ExamResult = typeof examResults.$inferSelect;
 export type InsertExamResult = typeof examResults.$inferInsert;
-
 /**
  * Question-level results — per-question breakdown
  */
@@ -106,6 +100,5 @@ export const questionResults = mysqlTable("question_results", {
   correctAnswer: text("correctAnswer"),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
-
 export type QuestionResult = typeof questionResults.$inferSelect;
 export type InsertQuestionResult = typeof questionResults.$inferInsert;
