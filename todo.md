@@ -1,0 +1,26 @@
+# Project TODO
+
+- [x] Design system: color palette, typography, theming in index.css
+- [x] Database schema: exams, exam_results, question_results tables
+- [x] Backend: file upload endpoint (exam images + mark scheme PDF to S3)
+- [x] Backend: AI grading procedure (LLM vision to grade against mark scheme)
+- [x] Backend: results storage and retrieval procedures
+- [x] Backend: progress/stats aggregation procedures
+- [x] Frontend: Dashboard layout with sidebar navigation
+- [x] Frontend: Upload page (subject/paper selection, file upload UI)
+- [x] Frontend: Grading results page with detailed analysis
+- [x] Frontend: Progress tracker dashboard with charts (score trends, subject breakdown)
+- [x] Frontend: Exam history list page
+- [x] Frontend: Individual exam result detail view
+- [x] Vitest tests for backend procedures
+- [x] Polish UI/UX and end-to-end verification
+- [x] Backend: dispute procedure (flag a question, AI re-evaluates with student's reasoning)
+- [x] Backend: regrade procedure (re-run full AI grading on an exam)
+- [x] Frontend: dispute button per question with reason input
+- [x] Frontend: regrade button on exam result page
+- [x] Vitest tests for dispute and regrade procedures
+- [x] Add paperCode column to exams table (e.g. 9709/12)
+- [x] Add Cambridge paper code reference data (subject codes, component codes)
+- [x] Update Upload page to include paper code input with auto-detection from subject/paper
+- [x] Update History and Result pages to display paper codes
+- [x] Update tests for paper code support
